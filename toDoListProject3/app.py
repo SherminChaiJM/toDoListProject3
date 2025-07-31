@@ -72,7 +72,8 @@ def edit(task_id):
             task["completed"] = 'completed' in request.form
             break
     save_tasks(tasks)
-    return redirect(url_for("index"))
+    sort_by = request.form.get("sort_by","")
+    return redirect(url_for("index", sort_by=sort_by))
 
 
 #refresh the app automatically
