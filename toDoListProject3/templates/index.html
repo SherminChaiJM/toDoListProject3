@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="p-4">
+
+    <div class="container-fluid">
+        <h1 class="mb-4">To-Do List</h1>
+
+        <!-- Add Task Form -->
+        <form action="/add" method="post" class="row g-2 mb-4">
+            <!-- Title Field -->
+            <div class="col-md-3">
+                <input type="text" name="title" placeholder="Task Title" required class="form-control">
+            </div>
+            <!-- Due Date Field -->
+            <div class="col-md-2">
+                <input type="date" name="due_date" placeholder="Due Date" required class="form-control">
+            </div>
+            <!-- Priority Field -->
+            <div class="col-md-2">
+                <select name="priority" placeholder="Priority" class="form-select">
+                    <option value="High">High</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <!-- Category Field -->
+            <div class="col-md-3">
+                <select id="category" name="category" class="form-select">
+                    <option value="" selected>Select Category</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat }}">{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- Add Button -->
+            <div class="col-md-2">
+                <button class="btn btn-primary" type="submit">Add Task</button>
+            </div>
+        </form>
+
+        <!-- Sort Options -->
+        <div class="mb-3">
+            <a href="/?sort_by=priority" class="btn btn-outline-secondary btn-sm">Sort by Priority</a>
+            <a href="/?sort_by=due_date" class="btn btn-outline-secondary btn-sm">Sort by Due Date</a>
+            <a href="/?sort_by=category" class="btn btn-outline-secondary btn-sm">Sort by Category</a>
+        </div>
+
+        <!-- Task Table -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Done</th>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <form action="/edit/{{ task.id }}" method="post">
+                    <tr>
+                        <!-- Completion Checkbox -->
+                        <td class="text-center align-middle">
+                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %}checked{% endif %} class="checkbox">
+                        </td>
+                        <!-- Task Title -->
+                        <td>
+                            <input type="text" name="title" value="{{ task.title }}" class="form-control" required>
+                        </td>
+                        <!-- Task Due Date -->
+                        <td>
+                            <input type="date" name="due_date" value="{{ task.due_date }}" class="form-control" required>
+                        </td>
+                        <!-- Priority Options -->
+                        <td class="
+                            {% if task.priority == 'High' %}table-danger
+                            {% elif task.priority == 'Medium' %}table-warning
+                            {% elif task.priority == 'Low' %}table-success
+                            {% endif %}
+                        ">
+                            <select name="priority" class="form-select">
+                                <option value="High" {% if task.priority == 'High' %}selected{% endif %}>High</option>
+                                <option value="Medium" {% if task.priority == 'Medium' %}selected{% endif %}>Medium</option>
+                                <option value="Low" {% if task.priority == 'Low' %}selected{% endif %}>Low</option>
+                            </select>
+                        </td>
+                        <!-- Task Category -->
+                        <td>
+                           <select name="category" class="form-select">
+                                <option value="">Select Category</option>
+                                {% for cat in categories %}
+                                    <option value="{{ cat }}" {% if task.category == cat %}selected{% endif %}>{{ cat }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <!-- Save and Delete Buttons -->
+                        <td class="d-flex">
+                            <button class="btn btn-success btn-sm" type="submit">Save</button>
+                            <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                </form>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+
+</html>
+
