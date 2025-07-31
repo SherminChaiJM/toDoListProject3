@@ -31,10 +31,10 @@
             </div>
             <!-- Category Field -->
             <div class="col-md-3">
-                <select id="category" name="category" class="form-select">
-                    <option value="" selected>Select Category</option>
+                <select id="category" name="category" class="form-select" required>
+                    <option value="" disabled selected hidden>Select Category</option>
                     {% for cat in categories %}
-                        <option value="{{ cat }}">{{ cat }}</option>
+                    <option value="{{ cat }}">{{ cat }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -101,10 +101,11 @@
                         </td>
                         <!-- Task Category -->
                         <td>
-                           <select name="category" class="form-select">
-                                <option value="">Select Category</option>
+                            <select name="category" class="form-select" required>
+                                <option value="" disabled hidden>Select Category</option>
                                 {% for cat in categories %}
-                                    <option value="{{ cat }}" {% if task.category == cat %}selected{% endif %}>{{ cat }}</option>
+                                <option value="{{ cat }}" {% if task.category==cat %}selected{% endif %}>{{ cat }}
+                                </option>
                                 {% endfor %}
                             </select>
                         </td>
