@@ -46,9 +46,15 @@
 
         <!-- Sort Options -->
         <div class="mb-3">
-            <a href="/?sort_by=priority" class="btn btn-outline-secondary btn-sm">Sort by Priority</a>
-            <a href="/?sort_by=due_date" class="btn btn-outline-secondary btn-sm">Sort by Due Date</a>
-            <a href="/?sort_by=category" class="btn btn-outline-secondary btn-sm">Sort by Category</a>
+            <a href="/?sort_by=priority"
+                class="btn btn-sm {% if sort_by == 'priority' %}btn-secondary{% else %}btn-outline-secondary{% endif %}">Sort
+                by Priority</a>
+            <a href="/?sort_by=due_date"
+                class="btn btn-sm {% if sort_by == 'due_date' %}btn-secondary{% else %}btn-outline-secondary{% endif %}">Sort
+                by Due Date</a>
+            <a href="/?sort_by=category"
+                class="btn btn-sm {% if sort_by == 'category' %}btn-secondary{% else %}btn-outline-secondary{% endif %}">Sort
+                by Category</a>
         </div>
 
         <!-- Task Table -->
@@ -66,6 +72,7 @@
             <tbody>
                 {% for task in tasks %}
                 <form action="/edit/{{ task.id }}" method="post">
+                    <input type="hidden" name="sort_by" value="{{ sort_by }}">
                     <tr>
                         <!-- Completion Checkbox -->
                         <td class="text-center align-middle">
