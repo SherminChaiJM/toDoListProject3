@@ -73,7 +73,7 @@
         </div>
 
 
-        <!-- Task Table -->
+        <!-- Task Card Rows -->
         <div class="card border-0">
             <div class="card-header">
                 <h5 class="card-title mb-0">
@@ -86,14 +86,17 @@
                     {% for task in tasks %}
                         <div class="row">
                             <div class="col">
-                                <div class="card mb-3">
+                                <div class="card mb-3 task-card {% if task.priority == 'High' %} border-danger border-2 rounded
+                                    {% elif task.priority == 'Medium' %}border-warning border-2 rounded
+                                    {% elif task.priority == 'Low' %}border-success border-2 rounded
+                                    {% endif %}">
                                     <div class="card-body">
                                         <form action="/edit/{{ task.id }}" method="post">
                                             <input type="hidden" name="sort_by" value="{{ sort_by }}">
-                                            <!-- Completion Checkbox -->                                   
+                                            <!-- Completion Checkbox -->   
                                             <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %}checked{% endif %} class="btn-check mb-3" autocomplete="off" id="check-{{ task.id }}" display="none">
 
-                                            <label for="check-{{ task.id }}" class="mb-3">
+                                            <label for="check-{{ task.id }}" class="mb-3" style="cursor: pointer;">
                                                 {% if not task.completed %}
                                                 <i class="fa-regular fa-square mb-3 fa-xl text-secondary"></i>
                                                 {% else %}
@@ -110,11 +113,7 @@
                                                 <input type="date" name="due_date" value="{{ task.due_date }}" class="form-control" required>
                                             </div>
                                             <!-- Priority Options -->
-                                            <div class="mb-3 
-                                                {% if task.priority == 'High' %}table-danger
-                                                {% elif task.priority == 'Medium' %}table-warning
-                                                {% elif task.priority == 'Low' %}table-success
-                                                {% endif %}">
+                                            <div class="mb-3">
                                                 <select name="priority" class="form-select">
                                                     <option value="High" {% if task.priority == 'High' %}selected{% endif %}>High</option>
                                                     <option value="Medium" {% if task.priority == 'Medium' %}selected{% endif %}>Medium</option>
@@ -133,8 +132,12 @@
                                             </div>
                                             <!-- Save and Delete Buttons -->
                                             <div class="d-flex gap-1">
-                                                <button class="btn btn-success btn-sm" type="submit">Save</button>
-                                                <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
+                                                <button class="btn btn-sm btn-outline-success" type="submit">
+                                                    <i class="fa-regular fa-floppy-disk"></i>
+                                                </button>
+                                                <a href="/delete/{{ task.id }}" class="btn btn-sm btn-outline-danger">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
                                             </div>
 
 
