@@ -1,50 +1,24 @@
 [
     {
-        "id": "799eebc7-5b65-47e2-ac74-d868ab11a29a",
-        "title": "dsfgdsfg",
-        "due_date": "2025-07-01",
-        "priority": "Medium",
-        "category": "Work",
-        "completed": true,
-        "cateogry": null
-    },
-    {
-        "id": "0f1cdf6a-603b-4152-8653-4f4023ad3449",
-        "title": "asdf",
-        "due_date": "2025-07-08",
+        "id": "5f189e58-8fcd-4d15-820a-9445de1cc98a",
+        "title": "Wake Up",
+        "due_date": "2025-08-06",
         "priority": "High",
-        "category": "Work",
-        "completed": false,
-        "cateogry": null
-    },
-    {
-        "id": "947954e3-493a-4b80-b458-8c2ad099d7d9",
-        "title": "hello",
-        "due_date": "2025-07-10",
-        "priority": "Medium",
         "category": "Personal",
         "completed": false
     },
     {
-        "id": "ab9468cb-35e2-47ea-b56e-b86e2b93a3f2",
-        "title": "sdf",
-        "due_date": "2025-07-09",
-        "priority": "Low",
-        "category": "Work",
-        "completed": true
-    },
-    {
-        "id": "83ddb2ac-a85d-48e0-86c2-56ab329f8de4",
-        "title": "zdxvczv",
-        "due_date": "2025-07-02",
+        "id": "bb1c2e70-6b8a-43d7-9e54-95e874a679b6",
+        "title": "Submit Project",
+        "due_date": "2025-08-05",
         "priority": "Medium",
-        "category": "Event",
-        "completed": true
+        "category": "Work",
+        "completed": false
     },
     {
-        "id": "933b32c4-9af5-423f-b317-e9fabe7e860c",
-        "title": "asdfdswf",
-        "due_date": "2025-07-16",
+        "id": "5655c9ae-31ac-400a-a1d3-3e7d9638b800",
+        "title": "First Parade",
+        "due_date": "2025-08-13",
         "priority": "Low",
         "category": "Event",
         "completed": false
